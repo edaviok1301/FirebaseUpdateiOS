@@ -67,7 +67,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
     Log.d(TAG, "FirebasePluginMessagingService onMessageReceived called");
     Log.e("DATA",remoteMessage.getData().toString());
-    Log.e("IsNotificationAcoustic:",FcmApi.isFcmMessage(remoteMessage));
+    Log.e("IsNotificationAcoustic:", String.valueOf(FcmApi.isFcmMessage(remoteMessage)));
 
 
     //Begin Acoustic Notification
