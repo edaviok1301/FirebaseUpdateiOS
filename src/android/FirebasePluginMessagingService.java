@@ -32,6 +32,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import co.acoustic.mobile.push.sdk.api.fcm.FcmApi;
+
 public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
   private static final String TAG = "FirebasePlugin";
@@ -63,6 +65,18 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
   @Override
   public void onMessageReceived(RemoteMessage remoteMessage) {
 
+    Log.d(TAG, "FirebasePluginMessagingService onMessageReceived called");
+    Log.e("DATA",remoteMessage.getData().toString());
+    
+
+
+    //Begin Acoustic Notification
+    if(FcmApi.isFcmMessage(remoteMessage)){
+      FcmApi.handleMceFcmMessage(getApplicationContext(), remoteMessage);
+    }
+    //END
+
+
      // BEGIN: Enable IU to handle messages targeted for IU
      // Add the below line on 1st line of the method.
      if (IUApp.handleFCMMessage(this, remoteMessage)) {
@@ -80,7 +94,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     // messages. For more see: https://firebase.google.com/docs/cloud-messaging/concept-options
     // [END_EXCLUDE]
     
-    Log.d(TAG, "FirebasePluginMessagingService onMessageReceived called");
+    
 
     // Pass the message to the receiver manager so any registered receivers can decide to handle it
     boolean wasHandled = FirebasePluginMessageReceiverManager.onMessageReceived(remoteMessage);
