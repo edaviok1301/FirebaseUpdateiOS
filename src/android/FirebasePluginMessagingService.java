@@ -67,21 +67,22 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
     Log.d(TAG, "FirebasePluginMessagingService onMessageReceived called");
     Log.e("DATA",remoteMessage.getData().toString());
-    
+    Log.e("IsNotificationAcoustic:",FcmApi.isFcmMessage(remoteMessage));
 
 
     //Begin Acoustic Notification
     if(FcmApi.isFcmMessage(remoteMessage)){
       FcmApi.handleMceFcmMessage(getApplicationContext(), remoteMessage);
+    
     }
     //END
-
-
+    else{    
      // BEGIN: Enable IU to handle messages targeted for IU
      // Add the below line on 1st line of the method.
      if (IUApp.handleFCMMessage(this, remoteMessage)) {
       return;
       }
+    
      // END
 
     // [START_EXCLUDE]
@@ -153,7 +154,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
     Log.d(TAG, "Notification Message Lights: " + lights);
 	Log.d(TAG, "Notification Message Image: " + image);
 	Log.d(TAG, "Notification Message BigIcon: " + image);
-    Log.d(TAG, "Notification Badge: " + badge);
+  Log.d(TAG, "Notification Badge: " + badge);
 
     if (badge != null && !badge.isEmpty()) {
       setBadgeNumber(badge);
@@ -167,6 +168,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
 	  sendNotification(id, title, text, data, true, sound, lights, image, bigIcon);
     }
   }
+  }//END onMessageReceived
 
   private void sendNotification(String id, String title, String messageBody, Map<String, String> data, boolean showNotification, String sound, String lights, String imageUri, String bigIconUri) {
     Bundle bundle = new Bundle();
