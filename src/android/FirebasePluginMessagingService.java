@@ -74,8 +74,9 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
     //Begin Acoustic Notification
     if(FcmApi.isFcmMessage(remoteMessage)){
-	MceSdk.getNotificationsClient().getNotificationsPreference().setIcon(
-                getApplicationContext(), (R.mipmap.ic_launcher));	    
+	MceSdk.getNotificationsClient().getNotificationsPreference().setIcon(getApplicationContext(), (R.mipmap.ic_launcher_foreground));
+      	MceSdk.getNotificationsClient().getNotificationsPreference().setLargeIcon(getApplicationContext(),(R.mipmap.ic_launcher_foreground));
+      	MceSdk.getNotificationsClient().getNotificationsPreference().setVibrateEnabled(getApplicationContext(),true); 	    
       	FcmApi.handleMceFcmMessage(getApplicationContext(), remoteMessage);
     
     }
