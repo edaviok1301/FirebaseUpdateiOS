@@ -33,6 +33,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import co.acoustic.mobile.push.sdk.api.fcm.FcmApi;
+import co.acoustic.mobile.push.sdk.api.MceSdk;
 
 public class FirebasePluginMessagingService extends FirebaseMessagingService {
 
